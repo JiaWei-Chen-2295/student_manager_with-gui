@@ -37,13 +37,13 @@ class BaseDao:
             if conn is not None:
                 conn.close()
 
-    def executeQuery(self, sql, *args):
+    def executeQuery(self, sql:str):
         conn = None
 
         try:
             conn = DButils.getConnction()
-            cursor = conn.cursor(prepared=True)
-            cursor.execute(sql, args)
+            cursor = conn.cursor()
+            cursor.execute(sql)
             rs = cursor.fetchall()
             return rs
         except mysql.connector.Error as err:
