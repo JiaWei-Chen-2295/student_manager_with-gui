@@ -1,7 +1,7 @@
 """
 :description: 操作数据库中 Majors 表的类
 :author: JavierChen
-:version: 1.0
+:version: 2.0
 """
 from NewStar.Dao.BaseDao import BaseDao
 from NewStar.Objects.Major import Major
@@ -37,6 +37,15 @@ class MajorDao():
             raise Exception
 
     def update(self, Major):
+        """
+                        根据专业ID更新 `Majors` 表中指定的专业记录。
+
+                        参数:
+                            - major: `Major` 类的实例，需包含专业ID (`major_id`) 和新的专业名称 (`major_name`)。
+
+                        异常:
+                            - 抛出异常，当更新操作失败时。
+                        """
         sql = "UPDATE Majors SET major_name = ? WHERE major_id = ?"
         r = BaseDao.executeUpdate(sql, Major.major_name, Major.major_id)
         if r == -1:
@@ -44,14 +53,14 @@ class MajorDao():
 
     def drop(self, Major):
         """
-                根据专业ID更新 `Majors` 表中指定的专业记录。
+                                根据专业ID从 `Majors` 表中删除指定的专业记录。
 
-                参数:
-                    - major: `Major` 类的实例，需包含专业ID (`major_id`) 和新的专业名称 (`major_name`)。
+                                参数:
+                                    - major: `Major` 类的实例，至少需要包含专业ID (`major_id`)。
 
-                异常:
-                    - 抛出异常，当更新操作失败时。
-                """
+                                异常:
+                                    - 抛出异常，当删除操作失败时。
+                                """
         sql = "DELETE FROM Majors WHERE major_id = ?"
         r = BaseDao.executeUpdate(sql, Major.major_id)
         if r == -1:
@@ -59,14 +68,15 @@ class MajorDao():
 
     def selectById(self, id):
         """
-                根据专业ID从 `Majors` 表中删除指定的专业记录。
+        根据专业ID查询 `Majors` 表中对应的记录。
 
-                参数:
-                    - major: `Major` 类的实例，至少需要包含专业ID (`major_id`)。
+        参数:
+            - id: 要查询的专业ID。
 
-                异常:
-                    - 抛出异常，当删除操作失败时。
-                """
+        返回:
+            - 查询到的 `Major` 实例，如果未找到，则应适当处理（当前示例未给出错误处理）。
+        """
+
         md = MajorDao()
         rs = md.selectAll()
         for _ in rs:
@@ -75,13 +85,10 @@ class MajorDao():
 
     def selectAll(self):
         """
-                根据专业ID查询 `Majors` 表中对应的记录。
-
-                参数:
-                    - id: 要查询的专业ID。
+                查询 `Majors` 表中的所有专业记录。
 
                 返回:
-                    - 查询到的 `Major` 实例，如果未找到，则应适当处理（当前示例未给出错误处理）。
+                    - 包含所有专业记录的 `Major` 实例列表。
                 """
         major_list = []
         sql = f"SELECT * FROM Majors"

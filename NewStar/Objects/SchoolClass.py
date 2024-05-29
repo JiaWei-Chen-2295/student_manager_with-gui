@@ -18,7 +18,7 @@ class SchoolClass:
         class_name: 属性，用于获取/设置班级名称。
         major_id: 属性，用于获取/设置专业ID。
     """
-    def __init__(self, class_id, class_name, major_id):
+    def __init__(self, class_name, major_id, class_id = None):
         self._class_id = class_id
         self._class_name = class_name
         self._major_id = major_id
