@@ -17,9 +17,10 @@ class Major:
             get_major_name(): 获取专业名称。
             set_major_name(name): 设置新的专业名称。
         """
-    def __init__(self, major_id, major_name):
+    def __init__(self, major_name, major_id=None):
         self._major_id = major_id
         self._major_name = major_name
+
 
     def __str__(self):
         return f"{self._major_name}专业的编号是{self._major_id}"

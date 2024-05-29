@@ -6,7 +6,7 @@
 import mysql
 from mysql.connector.abstracts import MySQLCursorAbstract
 
-from NewStar.utils import DButils
+from NewStar.utils.DButils import DButils
 class BaseDao:
     """
         操作数据库的基类
@@ -19,12 +19,13 @@ class BaseDao:
     def __init__(self):
         pass
 
-    def executeUpdate(self, sql, *args):
+    @staticmethod
+    def executeUpdate(sql, *args):
         conn = None
         cursor = None
 
         try:
-            conn = DButils.DButils.getConnction()
+            conn = DButils.getConnction()
             cursor = conn.cursor(prepared=True)
             cursor.execute(sql, args)
             conn.commit()
@@ -33,7 +34,25 @@ class BaseDao:
             conn.rollback()
             return -1
         finally:
-            DButils.DButils.closeAll(conn, None)
+            if conn is not None:
+                conn.close()
+
+    def executeQuery(self, sql, *args):
+        conn = None
+
+        try:
+            conn = DButils.getConnction()
+            cursor = conn.cursor(prepared=True)
+            cursor.execute(sql, args)
+            rs = cursor.fetchall()
+            return rs
+        except mysql.connector.Error as err:
+            print(f"Error occurred: {err}")
+            conn.rollback()
+            return -1
+        finally:
+            if conn is not None:
+                conn.close()
 
 if __name__ == '__main__':
     dao = BaseDao()
@@ -46,6 +65,10 @@ if __name__ == '__main__':
                       )
     if r != -1:
         print("success")
+
+    dao2 = BaseDao()
+    rs = dao2.executeQuery("SELECT * FROM Students")
+    print(rs)
 
 
 
