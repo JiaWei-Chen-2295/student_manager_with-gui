@@ -33,13 +33,7 @@ class User:
         self._class_id = class_id
         self._student_id = student_id
 
-    def __init__(self, username, password, role, class_id=None, student_id=None):
-        self._user_id = None
-        self._username = username
-        self._password = password
-        self._role = role
-        self._class_id = class_id
-        self._student_id = student_id
+
 
     @property
     def user_id(self):
