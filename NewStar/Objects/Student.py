@@ -29,7 +29,7 @@ class Student:
         set_class_id(class_id): 设置学生新的班级ID。
     """
 
-    def __init__(self, id, name, card_num, class_id):
+    def __init__(self,  name, card_num, class_id, id=None):
         self._id = id
         self._name = name
         self._card_num = card_num
