@@ -11,30 +11,15 @@ body {
 }
 
 .login-container {
-    max-width: 400px;
+    width: 500px; /* Adjust the width */
+    height: 400px; /* Adjust the height */
     margin: auto;
     padding: 40px;
-    background-color: rgba(255, 255, 255, 0.9); /* Add transparency for better visibility */
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3); /* Adjust the opacity to control frosted effect */
+    backdrop-filter: blur(10px); /* Add frosted glass effect */
+    border-radius: 20px; /* Increase the border-radius for rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-}
-
-.login-logo img {
-    max-width: 500px;
-    margin-bottom: 300px;
-}
-
-.login-container img {
-    max-width: 100px;
-    margin-bottom: 20px;
-}
-
-.login-container h1 {
-    text-align: center;
-    font-size: 40px; /* 放大字体 */
-    color: #333333;
-    margin-bottom: 30px;
 }
 
 .login-container .input-container {
@@ -43,20 +28,8 @@ body {
     align-items: center;
 }
 
-.login-container {
-    width: 500px; /* Adjust the width */
-    height: 400px; /* Adjust the height */
-    margin: auto;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.3); /* Adjust the opacity to control frosted effect */
-    backdrop-filter: blur(10px); /* Adjust the blur radius for frosted effect */
-    border-radius: 20px; /* Increase the border-radius for rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
 .login-container .login-input {
-    width: calc(100% - 20px);
+    width: 100%; /* Change the width to 100% */
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
@@ -75,15 +48,11 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center; /* Center align button text */
 }
 
-.login-logo img {
-    max-width: 80%;
-    margin-bottom: 30px;
-}
-
-.login-container {
-    background-color: #218838; /* Change hover background color */
+.login-button {
+    text-align: center;
 }
 
 .login-container .login-button:hover {
@@ -94,19 +63,24 @@ body {
     background-color: #28a745;
 }
 
-.login-container .agreement {
+.login-container {
     margin-top: 20px;
     font-size: 12px;
     color: #666666;
 }
+
+.agreement {
+
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666666;
+    text-align: center;
+
+}
+
 /* Adjusting text color to white */
 .login-container * {
     color: white;
-}
-
-/* Centering input fields */
-.login-input {
-    margin: 0 auto;
 }
 
 /* Styling the registration link */
@@ -127,9 +101,6 @@ def signup():
 
 
 with ui.card().classes('login-container'):
-    # ui.image('https://img2.imgtp.com/2024/05/30/b0titUDy.png').classes('login-logo')  # 添加Logo
-    # ui.image('https://img2.imgtp.com/2024/05/30/cqyLvvDd.png').classes('login-logo')  # 添加Logo
-    # ui.image('https://img2.imgtp.com/2024/05/30/bGec7gRG.png').classes('login-logo')  # 添加Logo
     ui.label('登录').classes('h1')
     with ui.column().classes('input-container'):
         username = ui.input(label='用户名').props('dense clearable').classes('login-input')
