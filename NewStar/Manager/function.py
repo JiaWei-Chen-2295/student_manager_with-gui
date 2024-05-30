@@ -41,7 +41,13 @@ def viewSelf_information(user_id):
 def update(user_id,user_name,password,id_role,Class_id,student_id,id):
     ud_2 = UserDao()
     user_list_1 = ud_2.selectById(user_id)
-    if User.role == 'admin' or 'class_manager':
+    if user_list_1.role == 'admin' or 'class_manager':
+        user_list_1.username = user_name
+        user_list_1.password = password
+        user_list_1.role = id_role
+        user_list_1.class_id = Class_id
+        user_list_1.student_id = student_id
+        user_list_1.user_id = id
         user_list_1 = UserDao(user_name, password, id_role, Class_id, student_id, id)
     return user_list_1
 
