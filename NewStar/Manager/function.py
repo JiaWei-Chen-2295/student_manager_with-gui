@@ -52,11 +52,14 @@ def update(user_id,user_name,password,id_role,Class_id,student_id,id):
     return user_list_1
 def delete(user_id):
     ud_3 = UserDao()
-    try:
-        ud_3 = ud_3.drop(user_id)
-        return ud_3
-    except:
-        return '该用户不存在'
+    user_list_2 = ud_3.selectById(user_id)
+    if user_list_2.role == 'admin':
+        try:
+
+            ud_3 = ud_3.drop(user_id)
+            return ud_3
+        except:
+            return '该用户不存在'
 
 
 
