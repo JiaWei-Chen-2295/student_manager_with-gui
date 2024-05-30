@@ -29,7 +29,7 @@ class UserDao():
         异常:
             - 抛出异常，当插入操作失败时。
         """
-        sql = "INSERT INTO Users () VALUES (?, ?, ?)"
+        sql = "INSERT INTO Users (username, password, role, class_id, student_id) VALUES (?, ?, ?, ?, ?)"
         r = BaseDao.executeUpdate(sql, User.username, User.password, User.role, User.class_id, User.student_id)
         if r == -1:
             raise Exception("Insert operation failed.")
@@ -44,8 +44,8 @@ class UserDao():
         异常:
             - 抛出异常，当更新操作失败时。
         """
-        sql = "UPDATE Students SET student_name = ?, student_card_num = ?, class_id = ? WHERE student_id = ?"
-        r = BaseDao.executeUpdate(sql, student.name, student.card_num, student.class_id, student.id)
+        sql = "UPDATE Students SET username = ?, password = ?, role = ?, class_id = ?, student_id WHERE user_id = ?"
+        r = BaseDao.executeUpdate(sql, User.username, User.password, User.role, )
         if r == -1:
             raise Exception("Update operation failed.")
 

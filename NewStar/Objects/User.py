@@ -16,7 +16,10 @@ class User:
         self._user_id = id
         self._username = username
         self._password = password
-        self._role = role
+        if role in ['admin', 'class_manager', 'student']:
+            self._role = role
+        else:
+            raise ValueError("Invalid role. Role must be one of 'admin', 'class_manager', 'student'.")
         self._class_id = class_id
         self._student_id = student_id
 
@@ -85,5 +88,5 @@ class User:
         )
 
 if __name__ == "__main__":
-    u = User(1, "df", "fdz", 'admin')
+    u = User(1, "df", "fdz", 'admin5')
     print(u)
