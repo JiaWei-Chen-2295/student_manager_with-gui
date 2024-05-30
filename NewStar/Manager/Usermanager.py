@@ -1,9 +1,11 @@
 from NewStar.Dao.UserDao import UserDao
 from NewStar.Objects.User import User
-def add(id,user_name,password,id_role,Class_id,student_id):
+def add(user_name,password,id_role,Class_id,student_id):
     from NewStar.Objects.User import User
-    user = User(user_name,password,id_role,Class_id,student_id,id)
-    return user
+    user = User(user_name,password,id_role,Class_id,student_id)
+    ud = UserDao()
+    ud.insert(user)
+
 # TODO: 将对象属性返回字典
 def view_all_information():
     """
@@ -19,10 +21,7 @@ def view_all_information():
     for i in user_list:
         a = {'id': i.user_id, 'id_name':i.username, 'id_role':i.role, 'Class_id':i.class_id, 'student_id':i.student_id}
         all_user.append(a)
-        if i.role == 'admin' or 'class_manager':
-            return all_user
-        else:
-            return None
+    return all_user
 
 
 def viewSelf_information(user_id):
@@ -62,17 +61,15 @@ def update(user_id,user_name,password,id_role,Class_id,student_id,id):
     """
     ud_2 = UserDao()
     user_list_1 = ud_2.selectById(user_id)
-    if user_list_1.role == 'admin' or 'class_manager':
-        user_list_1.username = user_name
-        user_list_1.password = password
-        user_list_1.role = id_role
-        user_list_1.class_id = Class_id
-        user_list_1.student_id = student_id
-        user_list_1.user_id = id
-        user_list_1 = UserDao(user_name, password, id_role, Class_id, student_id, id)
-        return user_list_1
-    else:
-        return None
+    user_list_1.username = user_name
+    user_list_1.password = password
+    user_list_1.role = id_role
+    user_list_1.class_id = Class_id
+    user_list_1.student_id = student_id
+    user_list_1.user_id = id
+    user_list_1 = User(user_list_1.username, user_list_1.password, user_list_1.role, user_list_1.class_id, user_list_1.student_id, user_list_1.user_id)
+    return user_list_1
+
 def delete(user_id):
     """
 
@@ -84,16 +81,16 @@ def delete(user_id):
     """
     ud_3 = UserDao()
     user_list_2 = ud_3.selectById(user_id)
-    if user_list_2.role == 'admin':
-        try:
 
-            ud_3 = ud_3.drop(user_id)
-            return ud_3
-        except:
-            return None
-    else:
-        return None
+
+    try:
+        ud_3.drop(user_list_2)
+    except:
+        return -1
 
 
 
 
+
+if __name__ == '__main__':
+    a = delete(11)
