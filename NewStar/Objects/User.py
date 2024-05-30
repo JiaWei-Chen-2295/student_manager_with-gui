@@ -10,22 +10,9 @@ class User:
         _class_id (int): 关联的班级ID，为外键。
         _student_id (int): 关联的学生ID，为外键且允许为空。
 
-    Methods:
-        get_user_id(): 获取用户ID。
-        get_username(): 获取用户名。
-        get_password(): 获取密码。
-        get_role(): 获取用户角色。
-        get_class_id(): 获取关联的班级ID。
-        get_student_id(): 获取关联的学生ID。
-
-        set_username(username): 设置用户名。
-        set_password(password): 设置密码。
-        set_role(role): 设置用户角色。
-        set_class_id(class_id): 设置关联的班级ID。
-        set_student_id(student_id): 设置关联的学生ID。
     """
 
-    def __init__(self, id, username, password, role, class_id=None, student_id=None):
+    def __init__(self, username, password, role, class_id=None, student_id=None, id=None):
         self._user_id = id
         self._username = username
         self._password = password
@@ -54,22 +41,18 @@ class User:
 
     @property
     def password(self):
-        """返回密码."""
         return self._password
 
     @password.setter
     def password(self, password):
-        """设置密码."""
         self._password = password
 
     @property
     def role(self):
-        """返回用户角色."""
         return self._role
 
     @role.setter
     def role(self, role):
-        """设置用户角色，包含有效性检查."""
         if role in ['admin', 'class_manager', 'student']:
             self._role = role
         else:
@@ -77,26 +60,21 @@ class User:
 
     @property
     def class_id(self):
-        """返回关联的班级ID."""
         return self._class_id
 
     @class_id.setter
     def class_id(self, class_id):
-        """设置关联的班级ID."""
         self._class_id = class_id
 
     @property
     def student_id(self):
-        """返回关联的学生ID."""
         return self._student_id
 
     @student_id.setter
     def student_id(self, student_id):
-        """设置关联的学生ID，允许设为None."""
         self._student_id = student_id
 
     def __str__(self):
-        """返回用户信息的字符串表示，便于打印和查看."""
         return (
             f"User Info:\n"
             f"\tUser ID: {self.user_id}\n"
