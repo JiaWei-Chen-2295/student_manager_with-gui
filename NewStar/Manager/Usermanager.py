@@ -22,23 +22,44 @@ def view_all_information():
         if i.role == 'admin' or 'class_manager':
             return all_user
         else:
-            return '您没有该权限'
+            return None
 
 
 def viewSelf_information(user_id):
+    """
+    先检测用户身份然后返回该用户信息
+    Args:
+        user_id: 传参获得用户查看id的信息
+
+    Returns:指定id的全部信息
+
+    """
     user_1 = []
     ud_1 = UserDao()
     user_list_1 = ud_1.selectById(user_id)
-    if user_list_1.role == 'student':
-        try:
-            c = {'id': user_list_1.user_id, 'id_name': user_list_1.username, 'id_role': user_list_1.role, 'Class_id': user_list_1.class_id,
-                 'student_id': user_list_1.student_id}
-            user_1.append(c)
-            return user_1
-        except:
-            return '该学生不存在'
+    try:
+        c = {'id': user_list_1.user_id, 'id_name': user_list_1.username, 'id_role': user_list_1.role, 'Class_id': user_list_1.class_id,
+             'student_id': user_list_1.student_id}
+        user_1.append(c)
+        return user_1
+    except:
+        return None
 
 def update(user_id,user_name,password,id_role,Class_id,student_id,id):
+    """
+
+    Args:
+        user_id: 传参获得要更新用户唯一标识
+        user_name: 新用户姓名
+        password: 新用户密码
+        id_role: 新用户角色
+        Class_id: 新用户班级id
+        student_id:新用户学号
+        id: 新唯一标识
+
+    Returns:更新后的对象
+
+    """
     ud_2 = UserDao()
     user_list_1 = ud_2.selectById(user_id)
     if user_list_1.role == 'admin' or 'class_manager':
@@ -49,8 +70,18 @@ def update(user_id,user_name,password,id_role,Class_id,student_id,id):
         user_list_1.student_id = student_id
         user_list_1.user_id = id
         user_list_1 = UserDao(user_name, password, id_role, Class_id, student_id, id)
-    return user_list_1
+        return user_list_1
+    else:
+        return None
 def delete(user_id):
+    """
+
+    Args:
+        user_id: 获得删除用户的唯一标识
+
+    Returns:删除后的对象
+
+    """
     ud_3 = UserDao()
     user_list_2 = ud_3.selectById(user_id)
     if user_list_2.role == 'admin':
@@ -59,8 +90,9 @@ def delete(user_id):
             ud_3 = ud_3.drop(user_id)
             return ud_3
         except:
-            return '该用户不存在'
-
+            return None
+    else:
+        return None
 
 
 
