@@ -13,11 +13,7 @@ class Role:
 #     def permission_distribution(self,permission):
 #         return permission in self.role.permission
 
-MANAGER_PERMISSION = ['add','view','update','delete']
-INSTRUCTOR_PERMISSION = ['view','update']
-STUDENT_PERMISSION = ['viewSelf','updateSelf']
 
-user = User(1, 'jjk', 'vghvgh', 'admin', None, None)
 
 
 

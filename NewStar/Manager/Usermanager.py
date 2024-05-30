@@ -1,3 +1,8 @@
+"""
+:description: 增删改查user类
+:author: Franklin
+:version: 2.0
+"""
 from NewStar.Dao.UserDao import UserDao
 from NewStar.Objects.User import User
 def add(user_name,password,id_role,Class_id,student_id):
