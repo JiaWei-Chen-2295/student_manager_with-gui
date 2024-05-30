@@ -1,46 +1,50 @@
+from NewStar.Dao.UserDao import UserDao
 from NewStar.Objects.User import User
-def add():
+def add(id,user_name,password,id_role,Class_id,student_id):
     from NewStar.Objects.User import User
-    id = input('请输入id')
-    id_name = input('请输入用户名')
-    password = input('请输入密码')
-    id_role = input('请输入学生角色')
-    Class_id = input('请输入班级id')
-    student_id = input('请输入学生id')
-    user = User(id_name,password,id_role,Class_id,student_id,id)
-    print(user)
-def view_all_information(user):
-    if User.role == 'admin' or 'class_manager':
-        print('学生姓名\t\t学生身份证号\t\t学生性别\t\t学生年龄\t\t学生学号\t\t学生班级\t\t学生专业')
-        id_1 = User.user_id
-        id_name_1 = User.username
-        password_1 = User.password
-        id_role_1 = User.role
-        Class_id_1 = User.class_id
-        student_id_1 = User.student_id
-        information_1 = '%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t' % (id_1,id_name_1,password_1,id_role_1,
-                                                                  Class_id_1,student_id_1)
-        print(information_1)
-def viewSelf_information(user_id):
-    a = user_id
-    if a.role == 'student':
-        try:
-            a.user_id == input('请输入您的id查看本人信息')
-        except:
-            print('该学生不存在')
+    user = User(user_name,password,id_role,Class_id,student_id,id)
+    return user
+# TODO: 将对象属性返回字典
+def view_all_information():
+    """
+    此函数首先检测用户身份
+    若身份为管理员或辅导员
+    允许查看所有学生信息
+
+    Returns:返回以每个对象属性组成的字典为元素的列表
+    """
+    all_user = []
+    ud = UserDao()
+    user_list = ud.selectAll()
+    for i in user_list:
+        a = {'id': i.user_id, 'id_name':i.username, 'id_role':i.role, 'Class_id':i.class_id, 'student_id':i.student_id}
+        all_user.append(a)
+        if i.role == 'admin' or 'class_manager':
+            return all_user
         else:
-            print('学生姓名\t\t学生身份证号\t\t学生性别\t\t学生年龄\t\t学生学号\t\t学生班级\t\t学生专业')
-            id_name_1 = a.username
-            password_1 = a.password
-            id_role_1 = a.role
-            Class_id_1 = a.class_id
-            student_id_1 = a.student_id
-            information_1 = '%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t' % (a, id_name_1, password_1, id_role_1,
-                                                                      Class_id_1, student_id_1)
-            print(information_1)
-def update():
+            return '您没有该权限'
+
+
+def viewSelf_information(user_id):
+    user_1 = []
+    ud_1 = UserDao()
+    user_list_1 = ud_1.selectById(user_id)
+    if user_list_1.role == 'student':
+        try:
+            c = {'id': user_list_1.user_id, 'id_name': user_list_1.username, 'id_role': user_list_1.role, 'Class_id': user_list_1.class_id,
+                 'student_id': user_list_1.student_id}
+            user_1.append(c)
+            return user_1
+        except:
+            return '该学生不存在'
+
+def update(user_id,user_name,password,id_role,Class_id,student_id,id):
+    ud_2 = UserDao()
+    user_list_1 = ud_2.selectById(user_id)
     if User.role == 'admin' or 'class_manager':
-        pass
+        user_list_1 = UserDao(user_name, password, id_role, Class_id, student_id, id)
+    return user_list_1
+
 
 
 
