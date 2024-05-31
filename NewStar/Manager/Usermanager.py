@@ -65,15 +65,19 @@ def update(user_id,user_name,password,id_role,Class_id,student_id,id):
 
     """
     ud_2 = UserDao()
-    user_list_1 = ud_2.selectById(user_id)
-    user_list_1.username = user_name
-    user_list_1.password = password
-    user_list_1.role = id_role
-    user_list_1.class_id = Class_id
-    user_list_1.student_id = student_id
-    user_list_1.user_id = id
-    user_list_1 = User(user_list_1.username, user_list_1.password, user_list_1.role, user_list_1.class_id, user_list_1.student_id, user_list_1.user_id)
-    return user_list_1
+    try:
+        user_list_1 = ud_2.selectById(user_id)
+    except:
+        return -1
+    else:
+        user_list_1.username = user_name
+        user_list_1.password = password
+        user_list_1.role = id_role
+        user_list_1.class_id = Class_id
+        user_list_1.student_id = student_id
+        user_list_1.user_id = id
+        user_list_1 = User(user_list_1.username, user_list_1.password, user_list_1.role, user_list_1.class_id, user_list_1.student_id, user_list_1.user_id)
+        return user_list_1
 
 def delete(user_id):
     """
