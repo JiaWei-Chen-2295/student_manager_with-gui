@@ -49,7 +49,7 @@ def viewSelf_information(user_id):
     except:
         return None
 
-def update(user_id,user_name,password,id_role,Class_id,student_id,id):
+def update(user_id,user_name,password,id_role,Class_id,student_id):
     """
 
     Args:
@@ -59,7 +59,6 @@ def update(user_id,user_name,password,id_role,Class_id,student_id,id):
         id_role: 新用户角色
         Class_id: 新用户班级id
         student_id:新用户学号
-        id: 新唯一标识
 
     Returns:更新后的对象
 
@@ -75,9 +74,7 @@ def update(user_id,user_name,password,id_role,Class_id,student_id,id):
         user_list_1.role = id_role
         user_list_1.class_id = Class_id
         user_list_1.student_id = student_id
-        user_list_1.user_id = id
-        user_list_1 = User(user_list_1.username, user_list_1.password, user_list_1.role, user_list_1.class_id, user_list_1.student_id, user_list_1.user_id)
-        return user_list_1
+        ud_2.update(user_list_1)
 
 def delete(user_id):
     """
@@ -102,4 +99,5 @@ def delete(user_id):
 
 
 if __name__ == '__main__':
-    a = delete(11)
+    update(8,'qwe',123,'admin',1,1)
+    print(view_all_information())

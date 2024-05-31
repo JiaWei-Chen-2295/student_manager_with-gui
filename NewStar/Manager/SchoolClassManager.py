@@ -51,12 +51,11 @@ def viewSelf_class_information(class_id):
         return None
 
 
-def update(class_id,class_new_id,class_name,major_id):
+def update(class_id,class_name,major_id):
     """
 
     Args:
         class_id: 更改对象id
-        class_new_id: 对象新的id
         major_id: major类指定对象新的名字
 
     Returns:返回更新后的class类
@@ -69,10 +68,8 @@ def update(class_id,class_new_id,class_name,major_id):
         return -1
     else:
 
-        sc_list.class_id = class_new_id
         sc_list.class_name = class_name
         sc_list.major_id = major_id
-        sc_list = SchoolClass(class_new_id,class_name,major_id)
         sd.update(sc_list)
 
 def delete(class_id):
@@ -92,4 +89,5 @@ def delete(class_id):
         return -1
 
 if __name__ == '__main__':
-    update(7,8,'rty',3)
+    delete(7)
+    print(view_all_information())
