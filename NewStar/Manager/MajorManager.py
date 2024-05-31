@@ -73,7 +73,7 @@ def update(id,major_new_id,major_name):
         major_list.major_id = major_new_id
         major_list.major_name = major_name
         major_list = Major(major_list.major_id,major_list.major_name)
-        return major_list
+        md.update(major_list)
 
 def delete(major_id):
     """
