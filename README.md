@@ -51,44 +51,7 @@
       FOREIGN KEY (class_id) REFERENCES Classes(class_id), -- 班级ID（外键）
       FOREIGN KEY (student_id) REFERENCES Students(student_id) ON DELETE SET NULL -- 学生ID（外键，可空）
   );
-  -- 以下使用了 ai 进行数据的捏造
-  -- 创建专业
-  INSERT INTO Majors (major_name)
-  VALUES ('大数据'), ('计算机科学与技术'), ('软件工程');
-  
-  -- 创建班级，假设每个专业有3个班级
-  INSERT INTO Classes (class_name, major_id)
-  SELECT CONCAT(m.major_name, '-', LPAD(c.class_number, 2, '0')), m.major_id
-  FROM (
-      SELECT 1 AS class_number UNION SELECT 2 UNION SELECT 3
-  ) AS c
-  CROSS JOIN Majors m;
-  
-  -- 创建学生，假设每个班级有10名学生
-  INSERT INTO Students (student_name, student_card_num, class_id)
-  WITH student_numbers AS (
-      SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) - 1 AS num
-      FROM Majors m, Majors m2 -- Just to get more rows
-  )
-  SELECT CONCAT('学生', s.num), CONCAT('111111111111111', LPAD(s.num, 8, '0')),
-         c.class_id
-  FROM student_numbers s
-  JOIN Classes c ON s.num % 3 = c.class_id % 3 AND s.num < 30 -- 假设总共创建30名学生
-  
-  -- 创建用户，包括管理员、班级管理员和学生
-  -- 假设只有一个管理员，每个班级有一个管理员，所有学生都是用户
-  INSERT INTO Users (username, password, role, class_id, student_id)
-  VALUES ('admin', 'admin123', 'admin', NULL, NULL); -- 管理员账号
-  
-  INSERT INTO Users (username, password, role, class_id, student_id)
-  SELECT CONCAT('class_manager_', c.class_name), CONCAT('manager', c.class_id), 'class_manager', c.class_id, NULL
-  FROM Classes c; -- 班级管理员账号
-  
-  INSERT INTO Users (username, password, role, class_id, student_id)
-  SELECT CONCAT('student_', s.student_id), CONCAT('stu', s.student_id), 'student', s.class_id, s.student_id
-  FROM Students s; -- 学生账号
-  
-  
+    
   ```
 
   

@@ -1,96 +1,11 @@
 from nicegui import ui
 
+def get_css():
+    with open('login_css', 'r') as file:
+        custom_css = file.read()
+        return custom_css
 # 定义自定义CSS样式
-custom_css = """
-body {
-    background-image: url('https://img2.imgtp.com/2024/05/30/bGec7gRG.png'); /* Replace URL with your image */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    font-family: Arial, sans-serif;
-}
-
-.login-container {
-    width: 500px; /* Adjust the width */
-    height: 400px; /* Adjust the height */
-    margin: auto;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.3); /* Adjust the opacity to control frosted effect */
-    backdrop-filter: blur(10px); /* Add frosted glass effect */
-    border-radius: 20px; /* Increase the border-radius for rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.login-container .input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.login-container .login-input {
-    width: 100%; /* Change the width to 100% */
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.login-container .login-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-align: center; /* Center align button text */
-}
-
-.login-button {
-    text-align: center;
-}
-
-.login-container .login-button:hover {
-    background-color: #0056b3;
-}
-
-.signup-button {
-    background-color: #28a745;
-}
-
-.login-container {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #666666;
-}
-
-.agreement {
-
-    margin-top: 20px;
-    font-size: 12px;
-    color: #666666;
-    text-align: center;
-
-}
-
-/* Adjusting text color to white */
-.login-container * {
-    color: white;
-}
-
-/* Styling the registration link */
-.signup-link {
-    color: #28a745; /* Green color */
-    text-decoration: underline;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-"""
+custom_css = get_css()
 
 # 注入自定义CSS
 ui.add_head_html(f'<style>{custom_css}</style>')
