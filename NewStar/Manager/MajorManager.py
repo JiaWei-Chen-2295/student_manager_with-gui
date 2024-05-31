@@ -52,12 +52,11 @@ def viewSelf_major(major_id):
     except:
         return None
 
-def update(id,major_new_id,major_name):
+def update(id,major_name):
     """
 
     Args:
         id: 更改对象id
-        major_new_id: 对象新的id
         major_name: major类指定对象新的名字
 
     Returns:返回更新后的major类
@@ -70,9 +69,7 @@ def update(id,major_new_id,major_name):
         return -1
     else:
 
-        major_list.major_id = major_new_id
         major_list.major_name = major_name
-        major_list = Major(major_list.major_id,major_list.major_name)
         md.update(major_list)
 
 def delete(major_id):
@@ -92,5 +89,4 @@ def delete(major_id):
         return -1
 
 if __name__ == '__main__':
-    a = update(3,3,'软件工程')
-
+    delete(7)
