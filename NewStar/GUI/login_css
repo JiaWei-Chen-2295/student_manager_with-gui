@@ -1,14 +1,18 @@
 body {
-    background-image: url('https://img2.imgtp.com/2024/05/30/bGec7gRG.png'); /* Replace URL with your image */
+    background-image: url('https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msKXW.img'); /* Replace URL with your image */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     font-family: Arial, sans-serif;
 }
 
+.h1 {
+    font-size: 24px;
+}
+
 .login-container {
-    width: 500px; /* Adjust the width */
-    height: 400px; /* Adjust the height */
+    width: 40%; /* Adjust the width */
+    height: auto; /* Adjust the height */
     margin: auto;
     padding: 40px;
     background: rgba(255, 255, 255, 0.3); /* Adjust the opacity to control frosted effect */
@@ -16,25 +20,30 @@ body {
     border-radius: 20px; /* Increase the border-radius for rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    justify_content: center;
 }
 
 .login-container .input-container {
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    align: center;
+
 }
 
 .login-container .login-input {
-    width: 100%; /* Change the width to 100% */
-    padding: 15px;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+
     border: 1px solid #ddd;
-    border-radius: 5px;
+
     font-size: 16px;
     box-sizing: border-box;
 }
 
 .login-container .login-button {
+    flex: 1;
     width: 100%;
     padding: 15px;
     background-color: #007bff;
@@ -48,7 +57,7 @@ body {
 }
 
 .login-button {
-    text-align: center;
+    /* text-align: center; */
 }
 
 .login-container .login-button:hover {
@@ -85,4 +94,11 @@ body {
     text-decoration: underline;
     cursor: pointer;
     transition: color 0.3s;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        padding: 20px;
+    }
 }

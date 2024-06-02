@@ -1,0 +1,94 @@
+/* 设置背景图片铺满页面 */
+body {
+    background-image: url('https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1msKXW.img');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* 设置全局字体颜色为白色 */
+}
+
+/* 毛玻璃效果卡片 */
+.login-container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px; /* 增大内边距 */
+    width: 100%;
+    max-width: 600px; /* 调整最大宽度 */
+    box-sizing: border-box;
+}
+
+/* 调整标签的样式 */
+.h1 {
+    font-size: 2.5em; /* 增大字体 */
+    margin-bottom: 30px;
+    text-align: center;
+    color: white;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 增大输入框之间的间距 */
+}
+
+.login-input {
+    width: 100%;
+    padding: 15px; /* 增大输入框内边距 */
+    font-size: 1.2em; /* 增大字体 */
+    color: white;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px; /* 增大按钮内边距 */
+    font-size: 1.2em; /* 增大字体 */
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.login-input::placeholder {
+
+	color: rgba(255, 255, 255, 0.7);
+
+}
+
+.agreement {
+    margin-top: 20px; /* 增大上外边距 */
+    text-align: center;
+    font-size: 1em; /* 增大字体 */
+    color: white;
+}
+
+.signup-link {
+    background-color: #28a745;
+    font-size: 1em; /* 缩小字体 */
+    padding: 10px; /* 缩小内边距 */
+    width: auto; /* 宽度自适应内容 */
+    margin: 10px auto 0; /* 居中 */
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.signup-link:hover {
+    background-color: #218838;
+}
