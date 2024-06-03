@@ -96,6 +96,13 @@ class UserDao():
             user_list.append(user)
         return user_list
 
+    def selectByUsername(self, username):
+        ud = UserDao()
+        users = ud.selectAll()
+        for user in users:
+            if user.username == username:
+                return user
+
 if __name__ == '__main__':
     m = User(None,None,'admin',id=10)
     md = UserDao()
