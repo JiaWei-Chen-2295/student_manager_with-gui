@@ -24,7 +24,7 @@ def view_all_information():
     ud = UserDao()
     user_list = ud.selectAll()
     for i in user_list:
-        a = {'id': i.user_id, 'id_name':i.username, 'id_role':i.role, 'Class_id':i.class_id, 'student_id':i.student_id}
+        a = {'id': i.user_id, 'id_name':i.username, 'pwd': i.password, 'id_role':i.role, 'Class_id':i.class_id, 'student_id':i.student_id}
         all_user.append(a)
     return all_user
 
