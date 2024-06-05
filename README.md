@@ -1,15 +1,58 @@
 # 学生管理系统（有界面）
 
+## 项目地址
+https://github.com/JiaWei-Chen-2295/student_manager_with-gui
+
 ## 项目环境
 - python 3.8.1
 - PyCharm 2024.1
+- 库详见本目录下的 requirements.txt
+
+## 运行本项目
+
+1. 首先确保你的 python 版本为 3.8.x 否则项目无法正常运行
+
+2. 使用以下命令安装 requirements.txt 中的库
+
+   ```shell
+   pip install -r requirements.txt
+   ```
+
+3. 安装 mysql 数据库（云端已有请忽略）
+
+4. 按照文档下方的建表语句进行建表
+
+5. 如果你的项目根目录下无 test_config 目录请自行添加，并在目录中新建  DBconnInfo.yml ，格式如下
+
+   ```
+     host: mysql服务器地址（127.0.0，1）
+     port: 3306
+     username: username
+     database: databasename
+     password: password
+   ```
+
+6. 运行 NewStar/start/main.py
+
+7. 如果没有反应，请尝试浏览器地址栏输入 [新建标签页](http://127.0.0.1:8080/)
+
+8. 登录账号密码
+
+   ```
+   账号：admin
+   密码：adminPass
+   ```
+
+9. 登录成功后浏览器不会关闭，但会弹出主界面窗口，请留意状态栏
 
 ## 项目功能
-1. 实现基本的用户管理，但是具有强的可拓展性。
+
+1. 实现基本的用户管理，并具有强的可拓展性。
 2. 使用 MySQL 存储专业，班级，学生，用户的信息。
 3. 提供对数据库不同表进行操作的模块的包。
 4. 用户具有角色属性（管理员，辅导员，学生），不同的角色有不同的权限。
 5. 使用 nicegui 库，将 python 代码变为前端展示。
+6. 使用 pyqt5 展示主界面
 
 ## 项目创建过程
 ###  表的创建（MySQL数据库）
@@ -63,40 +106,6 @@
 ### Python 增删改查不同表的类实现
 
 ### 实现具有不同权限的学生班级管理模块
-- Functions
-  - power model
-    
-    具有创建，读取，更新，删除资源的所有能力
-
-  - power distribute
-  
-    1.manager power
-        
-    具有创建，读取，更新，删除所有资源
-
-    2.instructor power
-
-    读取，更新，以及管理学生信息
-
-    3.student power 
-    
-    读取自己信息
-  - power with character
-      
-    权限与角色之间分配的多对多的函数关系
-  - character examination
-    
-    检测该角色，从而对应其具有的权限能力
-  
-  - test
-
-    各种代码段进行测试，验证程序的正确线程.
-    
-    
-  
-  
-  
-
 ### 界面的创建
 
  
