@@ -1,8 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, \
-    QTableWidgetItem, QFormLayout, QLineEdit, QLabel
+    QTableWidgetItem, QFormLayout, QLineEdit, QLabel, QMessageBox
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QColor
+
+from NewStar.Manager.StudentManager import add, update
 
 
 class StudentManagementSystem(QMainWindow):
@@ -31,20 +33,20 @@ class StudentManagementSystem(QMainWindow):
         self.viewButton2 = self.createButton('查看学生', self.showTable2)
         self.viewButton3 = self.createButton('查看班级', self.showTable3)
         self.viewButton4 = self.createButton('查看专业', self.showTable4)
-        self.modifyButton1 = self.createButton('修改/添加用户', lambda: self.showForm('用户'))
+        # self.modifyButton1 = self.createButton('修改/添加用户', lambda: self.showForm('用户'))
         self.modifyButton2 = self.createButton('修改/添加学生', lambda: self.showForm('学生'))
-        self.insertButton1 = self.createButton('修改/添加班级', lambda: self.showForm('班级'))
-        self.insertButton2 = self.createButton('修改/添加专业', lambda: self.showForm('专业'))
+        # self.insertButton1 = self.createButton('修改/添加班级', lambda: self.showForm('班级'))
+        # self.insertButton2 = self.createButton('修改/添加专业', lambda: self.showForm('专业'))
         self.deleteButton = self.createButton('删除', lambda: self.deleteRecord(id))
         self.deleteRecord(id)
         leftLayout.addWidget(self.viewButton1)
         leftLayout.addWidget(self.viewButton2)
         leftLayout.addWidget(self.viewButton3)
         leftLayout.addWidget(self.viewButton4)
-        leftLayout.addWidget(self.modifyButton1)
+        # leftLayout.addWidget(self.modifyButton1)
         leftLayout.addWidget(self.modifyButton2)
-        leftLayout.addWidget(self.insertButton1)
-        leftLayout.addWidget(self.insertButton2)
+        # leftLayout.addWidget(self.insertButton1)
+        # leftLayout.addWidget(self.insertButton2)
         leftLayout.addWidget(self.deleteButton)
         leftLayout.addStretch()  # 占据剩余空间
 
@@ -87,47 +89,24 @@ class StudentManagementSystem(QMainWindow):
 
         # 表单展示
         input_style = "background-color: #333; color: white; border-radius: 5px; padding: 5px;"
-        form_fields_lists = [
-            ['id', '姓名', '密码', '角色', 'class_id', 'student_id'],
-            ['id', '姓名', '一卡通', 'class_id'],
-            ['id', '班级名', '专业id'],
-            ['id', '专业名']
-        ]
+        # form_fields_lists = [
+        #     ['id', '姓名', '密码', '角色', 'class_id', 'student_id'],
+        #     ['id', '姓名', '一卡通', 'class_id'],
+        #     ['id', '班级名', '专业id'],
+        #     ['id', '专业名']
+        # ]
         self.formLayout = QFormLayout()
-        # self.idInput = QLineEdit()
-        # self.nameInput = QLineEdit()
-        # self.ageInput = QLineEdit()
-        # self.idInput.setStyleSheet(input_style)
-        # self.nameInput.setStyleSheet(input_style)
-        # self.ageInput.setStyleSheet(input_style)
-        # self.formLayout.addRow('序号:', self.idInput)
-        # self.formLayout.addRow('姓名:', self.nameInput)
-        # self.formLayout.addRow('年龄:', self.ageInput)
+        self.noInput = QLineEdit()
         self.idInput = QLineEdit()
         self.nameInput = QLineEdit()
         self.passwordInput = QLineEdit()
-        self.roleInput = QLineEdit()
         self.classIdInput = QLineEdit()
-        self.studentIdInput = QLineEdit()
+        self.cardInput = QLineEdit()
+        self.classIdInput = QLineEdit()
+        self.noInput.setStyleSheet(input_style)
         self.idInput.setStyleSheet(input_style)
         self.nameInput.setStyleSheet(input_style)
         self.passwordInput.setStyleSheet(input_style)
-        self.roleInput.setStyleSheet(input_style)
-        self.classIdInput.setStyleSheet(input_style)
-        self.studentIdInput.setStyleSheet(input_style)
-        self.formLayout.addRow('序号:', self.idInput)
-        self.formLayout.addRow('姓名:', self.nameInput)
-        self.formLayout.addRow('密码:', self.passwordInput)
-        self.formLayout.addRow('角色:', self.roleInput)
-        self.formLayout.addRow('class_id:', self.classIdInput)
-        self.formLayout.addRow('student_id:', self.studentIdInput)
-
-        self.idInput = QLineEdit()
-        self.nameInput = QLineEdit()
-        self.cardInput = QLineEdit()
-        self.classIdInput = QLineEdit()
-        self.idInput.setStyleSheet(input_style)
-        self.nameInput.setStyleSheet(input_style)
         self.cardInput.setStyleSheet(input_style)
         self.classIdInput.setStyleSheet(input_style)
         self.formLayout.addRow('序号:', self.idInput)
@@ -135,31 +114,9 @@ class StudentManagementSystem(QMainWindow):
         self.formLayout.addRow('一卡通:', self.cardInput)
         self.formLayout.addRow('class_id:', self.classIdInput)
 
-        self.idInput = QLineEdit()
-        self.classNameInput = QLineEdit()
-        self.majorIdInput = QLineEdit()
-        self.idInput.setStyleSheet(input_style)
-        self.classNameInput.setStyleSheet(input_style)
-        self.majorIdInput.setStyleSheet(input_style)
-        self.formLayout.addRow('序号:', self.idInput)
-        self.formLayout.addRow('班级名:', self.classNameInput)
-        self.formLayout.addRow('专业id:', self.majorIdInput)
-
-        self.idInput = QLineEdit()
-        self.majorNameInput = QLineEdit()
-        self.idInput.setStyleSheet(input_style)
-        self.majorNameInput.setStyleSheet(input_style)
-        self.formLayout.addRow('序号:', self.idInput)
-        self.formLayout.addRow('专业名:', self.majorNameInput)
-
         self.formWidget = QWidget()
         self.formWidget.setLayout(self.formLayout)
         rightLayout.addWidget(self.formWidget)
-        self.formWidget.hide()
-        self.formWidget = QWidget()
-        self.formWidget.setLayout(self.formLayout)
-        rightLayout.addWidget(self.formWidget)
-
         self.formWidget.hide()  # 初始隐藏表单
 
         # 标签展示，用于不同选项显示不同内容
@@ -252,49 +209,49 @@ class StudentManagementSystem(QMainWindow):
     def submitForm(self):
         id_value = self.idInput.text()
         name_value = self.nameInput.text()
-        age_value = self.ageInput.text()
+        card_value = self.cardInput.text()
+        class_id_value = self.classIdInput.text()
 
         # 将输入的值保存到数据库或打印到控制台
-        print(f"序号: {id_value}")
-        print(f"姓名: {name_value}")
-        print(f"年龄: {age_value}")
+        if id_value == "":
+            try:
+                add(name_value, card_value, class_id_value)
+                QMessageBox.information(self, "Info", "添加成功")
+            except Exception:
+                QMessageBox.information(self, "Warning", "添加错误。请检查你的输入")
 
+        else:
+            try:
+                update(id_value, name_value, card_value, class_id_value)
+                QMessageBox.information(self, "Info", "修改成功")
+            except Exception:
+                QMessageBox.information(self, "Warning", "修改错误。请检查你的输入")
         # 根据表单类型，执行相应的逻辑
         # 例如：if self.currentFormType == '用户': do something with user data
     def showForm(self, formType):
+        QMessageBox.information(self, "Info", "如果输入序号即为修改，不输入序号即为添加")
         self.formWidget.show()
         self.tableWidget.hide()
         self.label.hide()
 
-        if formType == '用户':
-            self.idInput.hide()
-            self.formLayout.labelForField(self.idInput).hide()
-            self.formLabel.setText("请填写用户信息")
-        else:
-            self.idInput.show()
-            self.formLayout.labelForField(self.idInput).show()
-            self.formLabel.setText(f"请填写{formType}信息")
-
-        # 显示提示文字
+        self.idInput.show()
+        self.formLayout.labelForField(self.idInput).show()
         self.submitButton.show()  # 显示提交按钮
-        self.idInput.clear()
-        self.nameInput.clear()
-        self.ageInput.clear()
-        self.formWidget.show()
-        self.tableWidget.hide()
+        # # 显示提示文字
+        # self.idInput.clear()
+        # self.nameInput.clear()
+        # self.ageInput.clear()
+        # self.formWidget.show()
+        # self.tableWidget.hide()
 
-        if formType == '用户':
-            self.idInput.setVisible(False)
-            self.formLayout.labelForField(self.idInput).setVisible(False)
-            self.idInput.clear()
-            self.nameInput.clear()
-            self.ageInput.clear()
-        else:
-            self.idInput.setVisible(True)
-            self.formLayout.labelForField(self.idInput).setVisible(True)
-            self.idInput.setPlaceholderText("请输入序号")
-            self.nameInput.setPlaceholderText("请输入姓名")
-            self.ageInput.setPlaceholderText("请输入年龄")
+        # self.showInfoBox("如果输入序号即为修改，不输入序号即为添加")
+        self.idInput.setVisible(True)
+        self.formLayout.labelForField(self.idInput).setVisible(True)
+        self.noInput.setPlaceholderText("如果输入序号即为修改，不输入序号即为添加")
+        self.idInput.setPlaceholderText("请输入序号")
+        self.nameInput.setPlaceholderText("请输入姓名")
+        self.cardInput.setPlaceholderText("请输入一卡通卡号")
+        self.classIdInput.setPlaceholderText("请输入 Class_id ,点击查看班级以对应id数字")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
