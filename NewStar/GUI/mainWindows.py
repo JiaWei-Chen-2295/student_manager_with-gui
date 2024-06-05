@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QVB
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QColor
 
-from NewStar.Manager.StudentManager import add, update
+from NewStar.Manager.StudentManager import add, update, delete
 
 
 class StudentManagementSystem(QMainWindow):
@@ -37,8 +37,7 @@ class StudentManagementSystem(QMainWindow):
         self.modifyButton2 = self.createButton('修改/添加学生', lambda: self.showForm('学生'))
         # self.insertButton1 = self.createButton('修改/添加班级', lambda: self.showForm('班级'))
         # self.insertButton2 = self.createButton('修改/添加专业', lambda: self.showForm('专业'))
-        self.deleteButton = self.createButton('删除', lambda: self.deleteRecord(id))
-        self.deleteRecord(id)
+        self.deleteButton = self.createButton('删除', lambda: self.deleteRecord())
         leftLayout.addWidget(self.viewButton1)
         leftLayout.addWidget(self.viewButton2)
         leftLayout.addWidget(self.viewButton3)
@@ -129,10 +128,10 @@ class StudentManagementSystem(QMainWindow):
         self.submitButton.setStyleSheet("""
             QPushButton {
                 background-color: #4CAF50; 
-                border-radius: 15px; 
+                border-radius: 20px; 
                 color: white;
                 font-size: 16px;
-                margin: 5px;
+                margin: 8px;
             }
             QPushButton:hover {
                 background-color: #45a049;
@@ -141,6 +140,24 @@ class StudentManagementSystem(QMainWindow):
         self.submitButton.clicked.connect(self.submitForm)
         rightLayout.addWidget(self.submitButton)
         self.submitButton.hide()  # 初始隐藏提交按钮
+
+        # 提交按钮2
+        self.submitButton2 = QPushButton('提交')
+        self.submitButton2.setStyleSheet("""
+                   QPushButton {
+                       background-color: #4CAF50; 
+                       border-radius: 15px; 
+                       color: white;
+                       font-size: 16px;
+                       margin: 5px;
+                   }
+                   QPushButton:hover {
+                       background-color: #45a049;
+                   }
+               """)
+        self.submitButton2.clicked.connect(self.submitForm2)
+        rightLayout.addWidget(self.submitButton2)
+        self.submitButton2.hide()  # 初始隐藏提交按钮
 
         # 总体布局
         mainLayout = QHBoxLayout()
@@ -191,13 +208,22 @@ class StudentManagementSystem(QMainWindow):
         data = MajorManager.view_all_major()
         self.showTable(headers, data)
 
-    def deleteRecord(self, id):
-        pass
-
+    def deleteRecord(self):
+        self.formWidget.hide()
+        self.label.hide()
+        self.formWidget.show()
+        self.idInput.show()
+        self.submitButton.hide()
+        self.submitButton2.show()
+        self.nameInput.hide()
+        self.cardInput.hide()
+        self.classIdInput.hide()
+        self.idInput.setPlaceholderText("请输入序号,目前仅支持删除学生")
 
     def showTable(self, headers, data):
         self.formWidget.hide()
         self.label.hide()
+        self.submitButton.hide()
         self.tableWidget.setRowCount(len(data))
         self.tableWidget.setColumnCount(len(headers))
         self.tableWidget.setHorizontalHeaderLabels(headers)
@@ -222,12 +248,25 @@ class StudentManagementSystem(QMainWindow):
 
         else:
             try:
+                id_value = int(id_value)
                 update(id_value, name_value, card_value, class_id_value)
                 QMessageBox.information(self, "Info", "修改成功")
             except Exception:
                 QMessageBox.information(self, "Warning", "修改错误。请检查你的输入")
+
         # 根据表单类型，执行相应的逻辑
-        # 例如：if self.currentFormType == '用户': do something with user data
+    def submitForm2(self):
+        id_value = self.idInput.text()
+        if id_value == '':
+            QMessageBox.information(self, "Info", "id不可为空")
+        else:
+            id_value = int(id_value)
+            try:
+                delete(id_value)
+                QMessageBox.information(self, "Info", "删除成功")
+            except:
+                QMessageBox.information(self, "警告", "删除失败")
+
     def showForm(self, formType):
         QMessageBox.information(self, "Info", "如果输入序号即为修改，不输入序号即为添加")
         self.formWidget.show()

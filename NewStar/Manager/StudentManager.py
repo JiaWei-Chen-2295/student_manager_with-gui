@@ -68,14 +68,12 @@ def update(student_id,student_name,student_card_num,student_class_id):
     sd = StudentDao()
     try:
         student_list = sd.selectById(student_id)
-    except:
-        return -1
-    else:
-
         student_list.name = student_name
         student_list.card_num = student_card_num
         student_list.class_id = student_class_id
         sd.update(student_list)
+    except:
+        return -1
 
 def delete(id):
     """
