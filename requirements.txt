@@ -3,3 +3,4 @@ PyQt5-sip==12.13.0
 mysql-connector-python==8.4.0
 PyYAML==6.0.1
 yarl==1.9.4
+nicegui==1.4.26
